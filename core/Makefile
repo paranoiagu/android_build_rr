@@ -1178,8 +1178,19 @@ INTERNAL_SYSTEMIMAGE_FILES := $(filter $(TARGET_OUT)/%, \
     $(RECOVERY_RESOURCE_ZIP) \
     $(RECOVERY_PATCH_INSTALL))
 
+systemimage-crusher: $(INTERNAL_SYSTEMIMAGE_FILES)
+	@echo -e "Optimizing PNGs to Shrink ROM Size!"
+	$(hide) APKCERTS=$(APKCERTS_FILE) ./build/tools/releasetools/pngcrusher
 
-FULL_SYSTEMIMAGE_DEPS := $(INTERNAL_SYSTEMIMAGE_FILES) $(INTERNAL_USERIMAGES_DEPS)
+.PHONY: systemimage-crusher
+
+v4a-hook: $(INTERNAL_SYSTEMIMAGE_FILES)
+	@echo -e "V4a audio effects hook!"
+	$(hide) ./build/tools/releasetools/v4a_hook.sh
+
+.PHONY: v4a-hook
+
+FULL_SYSTEMIMAGE_DEPS := $(INTERNAL_SYSTEMIMAGE_FILES) $(INTERNAL_USERIMAGES_DEPS) v4a-hook systemimage-crusher
 # -----------------------------------------------------------------
 # installed file list
 # Depending on anything that $(BUILT_SYSTEMIMAGE) depends on.
