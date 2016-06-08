@@ -1190,7 +1190,7 @@ v4a-hook: $(INTERNAL_SYSTEMIMAGE_FILES)
 
 .PHONY: v4a-hook
 
-FULL_SYSTEMIMAGE_DEPS := $(INTERNAL_SYSTEMIMAGE_FILES) $(INTERNAL_USERIMAGES_DEPS) v4a-hook systemimage-crusher
+FULL_SYSTEMIMAGE_DEPS := $(INTERNAL_SYSTEMIMAGE_FILES) $(INTERNAL_USERIMAGES_DEPS) v4a-hook
 # -----------------------------------------------------------------
 # installed file list
 # Depending on anything that $(BUILT_SYSTEMIMAGE) depends on.
